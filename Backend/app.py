@@ -2,15 +2,17 @@ import boto3
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-# AWS credentials and region
-AWS_ACCESS_KEY = 'AKIA6G4NF3L2T332PDFD'
-AWS_SECRET_KEY = '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'
-AWS_REGION = 'us-east-1'
-
+AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
+AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+AWS_REGION = os.getenv('AWS_REGION')
 # Helper to get Instance ID from IP
 def get_instance_id_from_ip(ip):
     ec2 = boto3.client(
